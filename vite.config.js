@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: "Social-Blogging-App",
   server:{
-    port:3000,
     proxy:{
       '/api': {
         target: 'https://mern-w0x6.onrender.com',
