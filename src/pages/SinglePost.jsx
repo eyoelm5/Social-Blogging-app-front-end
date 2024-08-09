@@ -21,6 +21,7 @@ const SinglePost = () => {
     const { id } = useParams()
 
     useEffect(() => {
+
       const getPost = async () =>{
         const response = await api.get(`/${id}`)
         const resData = response.data

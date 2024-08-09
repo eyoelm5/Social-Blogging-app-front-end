@@ -10,7 +10,6 @@ export default defineConfig({
       '/api': {
         target: 'https://mern-w0x6.onrender.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
       }
     }
   }
