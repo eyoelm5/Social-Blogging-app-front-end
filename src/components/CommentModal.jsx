@@ -73,7 +73,7 @@ const CommentModal = ({ comments, onClose, id }) => {
                   </div>
                   <p className="mt-1 text-gray-700">{comment.content}</p>
                 </div>{" "}
-                {comment.authorId._id === id ? (
+                {comment.authorId._id === status.userId ? (
                   <img
                     src={deleteIcon}
                     alt="Delete Icon"

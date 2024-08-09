@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const refreshStatus = async () => {
     try {
       const response = await api.get('/status');
-      setStatus({ loggedIn: response.data.loggedIn, user: response.data.user });
+      setStatus({ loggedIn: response.data.loggedIn, user: response.data.user, userId: response.data.userId });
     } catch (err) {
       setStatus({ loggedIn: false, user: '' });
     }
