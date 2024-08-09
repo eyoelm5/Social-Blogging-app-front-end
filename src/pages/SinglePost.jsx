@@ -93,7 +93,7 @@ const SinglePost = () => {
           <div className="flex px-3 py-3 flex-col order-last ml-3">
             <div className="author flex items-center">
               <img
-                src={post.authorId.profilePicture}
+                src={post.authorId.name}
                 alt="author profile"
                 className="w-16 h-16"
                 onError={(e) => {
