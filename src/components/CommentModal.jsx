@@ -1,57 +1,54 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import closeIcon from '../assets/close.png';
-import deleteIcon from '../assets/deleteicon.png'
-import { useAuth } from '../AuthContext';
+import closeIcon from "../assets/close.png";
+import deleteIcon from "../assets/deleteicon.png";
+import { useAuth } from "../AuthContext";
 import api from "../../api/posts";
 
-const CommentModal = ({ comments, onClose, id}) => {
-  const { status } = useAuth()
-  const navigate = useNavigate()
+const CommentModal = ({ comments, onClose, id }) => {
+  const { status } = useAuth();
+  const navigate = useNavigate();
   const [allComments, setAllComments] = useState(comments);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-
-    const getPost = async () =>{
-      const response = await api.get(`/${id}`)
-      const resData = response.data
-      setAllComments(resData.post.comments)
+    const getPost = async () => {
+      const response = await api.get(`/${id}`);
+      const resData = response.data;
+      setAllComments(resData.post.comments);
+    };
+    try {
+      getPost();
+    } catch (err) {
+      console.log(err);
     }
-    try{
-      getPost()
-      }
-    catch (err){
-      console.log(err)
-    }
-
-  },[isLoading])
+  }, [isLoading]);
 
   const submitComment = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const finalComment = {
-      content: newComment
-    }
-    setAllComments(prevData => [...prevData, finalComment])
-    try{
-      await api.post(`/${id}/comment`, finalComment)
-      setNewComment("")
-      setIsLoading(false)
+      content: newComment,
+    };
+    setAllComments((prevData) => [...prevData, finalComment]);
+    try {
+      await api.post(`/${id}/comment`, finalComment);
+      setNewComment("");
+      setIsLoading(false);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
   const deleteComment = async (commentId) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      await api.delete(`/${id}/comment/${commentId}`)
-      setIsLoading(false)
-    } catch(err){
-      console.log(err)
+      await api.delete(`/${id}/comment/${commentId}`);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -64,13 +61,26 @@ const CommentModal = ({ comments, onClose, id}) => {
         </div>
         <div className="mt-4 min-h-6">
           {allComments.length !== 0 ? (
-            !isLoading && allComments.map((comment, index) => (
-              <div key={index} className="mb-2 mx-8 flex justify-between items-center">
+            !isLoading &&
+            allComments.map((comment, index) => (
+              <div
+                key={index}
+                className="mb-2 mx-8 flex justify-between items-center"
+              >
                 <div>
-                  <div className="text-lg font-semibold">{comment.authorId.name}</div>
+                  <div className="text-lg font-semibold">
+                    {comment.authorId.name}
+                  </div>
                   <p className="mt-1 text-gray-700">{comment.content}</p>
                 </div>
-                <img src={deleteIcon} alt="Delete Icon" className="h-6 hover:cursor-pointer" onClick={() => deleteComment(comment._id)}/>
+                {authorId._id === id ? (
+                  <img
+                    src={deleteIcon}
+                    alt="Delete Icon"
+                    className="h-6 hover:cursor-pointer"
+                    onClick={() => deleteComment(comment._id)}
+                  />
+                ) : null}
               </div>
             ))
           ) : (
@@ -93,7 +103,12 @@ const CommentModal = ({ comments, onClose, id}) => {
             </button>
           </div>
         ) : (
-          <button className="text-white bg-black py-3 rounded-md w-full mt-4 mx-auto hover:cursor-pointer" onClick={() => navigate('/signin')}>Login To Comment</button>
+          <button
+            className="text-white bg-black py-3 rounded-md w-full mt-4 mx-auto hover:cursor-pointer"
+            onClick={() => navigate("/signin")}
+          >
+            Login To Comment
+          </button>
         )}
       </div>
     </div>
