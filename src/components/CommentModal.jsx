@@ -9,7 +9,7 @@ const CommentModal = ({ comments, onClose, id }) => {
   const { status } = useAuth();
   const navigate = useNavigate();
   const [allComments, setAllComments] = useState(comments);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
@@ -72,8 +72,8 @@ const CommentModal = ({ comments, onClose, id }) => {
                     {comment.authorId.name}
                   </div>
                   <p className="mt-1 text-gray-700">{comment.content}</p>
-                </div>
-                {authorId._id === id ? (
+                </div>{" "}
+                {comment.authorId._id === id ? (
                   <img
                     src={deleteIcon}
                     alt="Delete Icon"
