@@ -7,6 +7,7 @@ import api from "../../api/posts"
 import LoadingPage from "../components/Loading"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import parse from 'html-react-parser';
 
 const modules = {
     toolbar: [
@@ -81,6 +82,10 @@ const CreateBlog = () => {
     const sumbit = async (event) => {
         setIsLoading(true)
         event.preventDefault();
+        setPostData(prevData => ({
+            ...prevData,
+            content: parse(prevData.content)
+        }))
         try{
             await api.post("/", postData)
             setIsLoading(false)
