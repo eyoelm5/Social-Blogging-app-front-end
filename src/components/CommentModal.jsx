@@ -13,7 +13,7 @@ const CommentModal = ({ onClose, id }) => {
   const [newComment, setNewComment] = useState("");
   const [error, setError] = useState("");
   const[trigger, setTrigger] = useState(false)
-  console.log(status)
+  
   useEffect(() => {
     const fetchComments = async () => {
       setIsLoading(true);
@@ -50,10 +50,10 @@ const CommentModal = ({ onClose, id }) => {
 
     try {
       await api.delete(`/${id}/comment/${commentId}`);
-    } catch (err) {
-      setError("Failed to delete comment.");
-    } finally {
       setComments((prevComments) => prevComments.filter(comment => comment._id !== commentId));
+    } catch (err) {
+      console.log(err)
+    } finally {
       setIsLoading(false);
     }
   };

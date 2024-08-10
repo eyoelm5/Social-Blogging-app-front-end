@@ -21,6 +21,7 @@ function Signin() {
       refreshStatus()
       navigate('/')
     } catch(err){
+      console.log(err.response)
       setError(err.response.data.message)
     }
   };

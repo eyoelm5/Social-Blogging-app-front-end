@@ -8,7 +8,11 @@ const NavBar = ({id, handle}) =>{
     const { status, refreshStatus } = useAuth()
     const navigate = useNavigate();
     async function logOut(){
-        await api.post('/logout')
+        try{
+            await api.post('/logout')
+        } catch (err){
+            console.log(err)
+        }
         refreshStatus()
         navigate("/")
     }
