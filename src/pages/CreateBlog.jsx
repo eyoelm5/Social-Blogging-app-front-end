@@ -7,7 +7,6 @@ import api from "../../api/posts"
 import LoadingPage from "../components/Loading"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import parse from 'html-react-parser';
 
 const modules = {
     toolbar: [
