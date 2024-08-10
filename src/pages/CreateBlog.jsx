@@ -31,6 +31,7 @@ const formats = [
 ];
 
 const CreateBlog = () => {
+    const [imageUploaded, setImageUploaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
     const [postData, setPostData] = useState({
@@ -84,6 +85,7 @@ const CreateBlog = () => {
         try{
             await api.post("/", postData)
             setIsLoading(false)
+            setImageUploaded(true)
             navigate('/myposts')
         }catch(err){
             console.log(err)
@@ -98,57 +100,57 @@ const CreateBlog = () => {
                 isLoading?
                 <LoadingPage />
                 :
-                    <div className="content-center flex-grow">
-                        <div className="max-w-96 m-auto p-2">
-                            <h1 className="text-3xl">Create Post</h1>
-                            <form onSubmit={sumbit}>
-                                <input 
-                                    type="text" 
-                                    placeholder="Title" 
-                                    className="block p-2 w-full rounded-md mt-4"
-                                    onChange={handleChange}
-                                    name = "title"
-                                    value={postData.title}
-                                    required
-                                />
-                                <select name="category" onChange={handleChange} value={postData.category} className="w-full p-2 my-4 rounded-md" required>
-                                    <option value="" disabled>Choose Category</option>
-                                    <option value="technology">Technology</option>
-                                    <option value="Art">Art</option>
-                                    <option value="Education">Education</option>
-                                    <option value="Nutrition">Nutrition</option>
-                                    <option value="Fashion">Fashion</option>
-                                    <option value="Music">Music</option>
-                                    <option value="Mindfulness">Mindfulness</option>
-                                    <option value="uncatagorized">Uncatagorized</option>
-                                </select>
-                                <ReactQuill
-                                    theme="snow"
-                                    modules={modules}
-                                    formats={formats}
-                                    value={postData.content}
-                                    onChange={markDownChange}
-                                    className="bg-white h-64"
-                                    required
-                                />
-                                {postData.image && <img src={preview} alt="Post Image" className="w-full my-5"/>}
-                                <label className="block my-5">
-                                    <input
-                                        type="file"
-                                        onChange={handleImageChange}
-                                        className="block w-full text-sm text-slate-500
-                                            file:py-2 file:px-4
-                                            file:rounded-xl file:border-0
-                                            file:text-base file:font-semibold
-                                            file:bg-slate-50 file:text-black"
-                                        accept="image/*"
-                                        required
-                                    />
-                                </label>
-                                <button className="text-white bg-black p-2 rounded-md mt-4" type="submit">Create</button>
-                            </form>
-                        </div>
+                <div className="content-center flex-grow">
+                <div className="max-w-96 mx-auto my-10 p-2">
+                    <h1 className="text-3xl">Create Post</h1>
+                    <form onSubmit={sumbit}>
+                        <input 
+                            type="text" 
+                            placeholder="Title" 
+                            className="block p-2 w-full rounded-md mt-4"
+                            onChange={handleChange}
+                            name = "title"
+                            value={postData.title}
+                            required
+                        />
+                        <select name="category" onChange={handleChange} value={postData.category} className="w-full p-2 my-4 rounded-md">
+                            <option value="" disabled>Choose Category</option>
+                            <option value="technology">Technology</option>
+                            <option value="Art">Art</option>
+                            <option value="Education">Education</option>
+                            <option value="Nutrition">Nutrition</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Music">Music</option>
+                            <option value="Mindfulness">Mindfulness</option>
+                            <option value="uncatagorized">Uncatagorized</option>
+                        </select>
+                        <ReactQuill
+                            modules={modules}
+                            formats={formats}
+                            value={postData.content}
+                            onChange={markDownChange}
+                            className="bg-white h-64"
+                            required
+                        />
+                        {preview && <img src={preview} alt="Post Image" className="w-full my-5"/>}
+                        {!imageUploaded && (
+                        <label className="block my-5">
+                            <input
+                            type="file"
+                            onChange={handleImageChange}
+                            className="block w-full text-sm text-slate-500
+                                file:py-2 file:px-4
+                                file:rounded-xl file:border-0
+                                file:text-base file:font-semibold
+                                file:bg-slate-50 file:text-black"
+                            required
+                            />
+                        </label>
+                )}
+                            <button className="text-white bg-black p-2 rounded-md mt-4" type="submit">Create Post</button>
+                        </form>
                     </div>
+                </div>
             }
             <Footer />
         </div>

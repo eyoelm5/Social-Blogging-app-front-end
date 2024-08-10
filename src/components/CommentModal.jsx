@@ -13,40 +13,43 @@ const CommentModal = ({ comments, onClose, id }) => {
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-    const getPost = async () => {
-      const response = await api.get(`/${id}`);
-      const resData = response.data;
-      setAllComments(resData.post.comments);
+    const fetchComments = async () => {
+      try {
+        const response = await api.get(`/${id}`);
+        setAllComments(response.data.post.comments);
+      } catch (err) {
+        console.error("Failed to fetch comments:", err);
+      }
     };
-    try {
-      getPost();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [isLoading]);
+
+    fetchComments();
+  }, [id]); 
 
   const submitComment = async () => {
     setIsLoading(true);
-    const finalComment = {
-      content: newComment,
-    };
-    setAllComments((prevData) => [...prevData, finalComment]);
+    const finalComment = { content: newComment };
+
     try {
-      await api.post(`/${id}/comment`, finalComment);
+      const response = await api.post(`/${id}/comment`, finalComment);
+      setAllComments((prevData) => [...prevData, response.data.comment]);
       setNewComment("");
-      setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      console.error("Failed to submit comment:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const deleteComment = async (commentId) => {
     setIsLoading(true);
+
     try {
       await api.delete(`/${id}/comment/${commentId}`);
-      setIsLoading(false);
+      setAllComments((prevData) => prevData.filter(comment => comment._id !== commentId));
     } catch (err) {
-      console.log(err);
+      console.error("Failed to delete comment:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -62,9 +65,9 @@ const CommentModal = ({ comments, onClose, id }) => {
         <div className="mt-4 min-h-6">
           {allComments.length !== 0 ? (
             !isLoading &&
-            allComments.map((comment, index) => (
+            allComments.map((comment) => (
               <div
-                key={index}
+                key={comment._id}
                 className="mb-2 mx-8 flex justify-between items-center"
               >
                 <div>
@@ -72,15 +75,15 @@ const CommentModal = ({ comments, onClose, id }) => {
                     {comment.authorId.name}
                   </div>
                   <p className="mt-1 text-gray-700">{comment.content}</p>
-                </div>{" "}
-                {comment.authorId._id === status.userId ? (
+                </div>
+                {comment.authorId._id === status.userId && (
                   <img
                     src={deleteIcon}
                     alt="Delete Icon"
                     className="h-6 hover:cursor-pointer"
                     onClick={() => deleteComment(comment._id)}
                   />
-                ) : null}
+                )}
               </div>
             ))
           ) : (
@@ -98,8 +101,9 @@ const CommentModal = ({ comments, onClose, id }) => {
             <button
               className="mt-2 w-full bg-gray-900 text-white py-2 rounded-md"
               onClick={submitComment}
+              disabled={isLoading}
             >
-              Submit
+              {isLoading ? "Submitting..." : "Submit"}
             </button>
           </div>
         ) : (
