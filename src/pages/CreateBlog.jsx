@@ -116,14 +116,14 @@ const CreateBlog = () => {
                         />
                         <select name="category" onChange={handleChange} value={postData.category} className="w-full p-2 my-4 rounded-md">
                             <option value="" disabled>Choose Category</option>
-                            <option value="technology">Technology</option>
+                            <option value="Technology">Technology</option>
                             <option value="Art">Art</option>
                             <option value="Education">Education</option>
                             <option value="Nutrition">Nutrition</option>
                             <option value="Fashion">Fashion</option>
                             <option value="Music">Music</option>
                             <option value="Mindfulness">Mindfulness</option>
-                            <option value="uncatagorized">Uncatagorized</option>
+                            <option value="Uncategorized">Uncatagorized</option>
                         </select>
                         <ReactQuill
                             modules={modules}
