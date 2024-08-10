@@ -9,7 +9,6 @@ import CreateBlog from "./pages/CreateBlog";
 import EditBlog from "./pages/EditBlog";
 import UpdateProfile from "./pages/UpdateProfile";
 import SinglePost from "./pages/SinglePost"
-import data  from "../data";
 
 
 function App() {  

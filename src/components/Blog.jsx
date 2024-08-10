@@ -6,7 +6,6 @@ import liked from "../assets/like.png";
 import notLiked from "../assets/like1.png";
 import bookmarking from "../assets/bookmark.png";
 import bookmarked from "../assets/bookmarked.png";
-import CommentModal from "./CommentModal";
 
 function Blog(props) {
   const [like, setLike] = useState(false);
