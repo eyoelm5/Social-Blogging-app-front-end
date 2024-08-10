@@ -23,7 +23,7 @@ function Blog(props) {
   const bookImg = book ? bookmarked : bookmarking;
 
   const calculateTimeElapsed = () => {
-    const postDate = new Date(post.createdAt);
+    const postDate = new Date(props.createdAt);
     const milli = postDate.getTime()
     const now = new Date().getTime();
     const elapsed = now - milli;
