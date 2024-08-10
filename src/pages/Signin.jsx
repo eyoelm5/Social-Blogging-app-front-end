@@ -37,7 +37,7 @@ function Signin() {
       isLoading?
       <LoadingPage />
       :
-      <div className="flex flex-col min-h-[calc(100vh-80px)]">
+      <div className="flex flex-col">
   
       <div className="flex items-center justify-center bg-gray-200 w-full flex-grow">
         <div className="w-full max-w-xs">
