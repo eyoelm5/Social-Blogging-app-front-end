@@ -47,12 +47,11 @@ const CommentModal = ({ onClose, id }) => {
   const deleteComment = async (commentId) => {
     setIsLoading(true);
     setError("");
-
     try {
       await api.delete(`/${id}/comment/${commentId}`);
       setComments((prevComments) => prevComments.filter(comment => comment._id !== commentId));
     } catch (err) {
-      console.log(err)
+      setError("Failed to delete comment")
     } finally {
       setIsLoading(false);
     }
@@ -96,7 +95,7 @@ const CommentModal = ({ onClose, id }) => {
                     onClick={() => deleteComment(comment._id)}
                     className="ml-4 text-red-500 hover:cursor-pointer"
                   >
-                    <img src={deleteIcon} alt="Delete" onClick={deleteComment} className="w-6" />
+                    <img src={deleteIcon} alt="Delete" className="w-6" />
                   </button>
                 )}
               </div>
