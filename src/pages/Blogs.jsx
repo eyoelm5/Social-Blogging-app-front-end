@@ -10,13 +10,14 @@ const Blogs = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState([]);
+  
   useEffect(() => {
     const getPosts = async () => {
       try {
         const response = await api.get("/");
         const resData = response.data;
         setPosts(resData);
-        setSearch(resData);
+        setSearch(resData);  
         setIsLoading(false);
       } catch (error) {
         console.error("Failed to fetch posts", error);
@@ -26,16 +27,15 @@ const Blogs = () => {
     getPosts();
   }, []);
 
-  const checkCategory = () => {
-    const categories = document.querySelectorAll('#categories')
-    categories.forEach(category =>{
-      if (category.textContent === search){
-        return true
-      }else {
-        return false
-      }
-    })
-  }
+  const filterByCategory = (category) => {
+    if (category === "") {
+      setSearch(posts);
+    } else {
+      const filteredPosts = posts.filter(post => post.category === category);
+      setSearch(filteredPosts);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header page="Blogs" data={posts} dataChange={setSearch} />
@@ -46,14 +46,14 @@ const Blogs = () => {
         <div className="md:grid-cols-[220px_1fr] pt-10 flex-grow md:grid md:items-start py-4 flex flex-col items-center">
           <ul className="mx-5 my-12 hidden flex-col gap-2 font-semibold md:flex">
             <li className="text-2xl font-bold">All Categories</li>
-            <li onClick={() => setSearch("")}>All Blogs</li>
-            <li onClick={() => setSearch("Technology")}>Technology</li>
-            <li onClick={() => setSearch("Art")}>Art</li>
-            <li onClick={() => setSearch("Education")}>Education</li>
-            <li onClick={() => setSearch("Nutrition")}>Nutrition</li>
-            <li onClick={() => setSearch("Fashion")}>Fashion</li>
-            <li onClick={() => setSearch("Music")}>Music</li>
-            <li onClick={() => setSearch("Uncatagorized")}>Uncatagorized</li>
+            <li onClick={() => filterByCategory("")}>All Blogs</li>
+            <li onClick={() => filterByCategory("Technology")}>Technology</li>
+            <li onClick={() => filterByCategory("Art")}>Art</li>
+            <li onClick={() => filterByCategory("Education")}>Education</li>
+            <li onClick={() => filterByCategory("Nutrition")}>Nutrition</li>
+            <li onClick={() => filterByCategory("Fashion")}>Fashion</li>
+            <li onClick={() => filterByCategory("Music")}>Music</li>
+            <li onClick={() => filterByCategory("Uncategorized")}>Uncategorized</li>
           </ul>
           <div className="blogs flex-grow grid grid-cols-1 gap-4 bg-gray-300 px-2 md:px-8 md:py-3 py-1">
             {search.map((post) => {
