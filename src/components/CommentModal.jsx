@@ -32,10 +32,10 @@ const CommentModal = ({ onClose, id }) => {
   const submitComment = async () => {
     setIsLoading(true);
     setError("");
-    const commentPayload = { content: newComment };
+    const finalComment= { content: newComment };
 
     try {
-      const response = await api.post(`/${id}/comment`, commentPayload);
+      const response = await api.post(`/${id}/comment`, finalComment);
       setComments((prevComments) => [...prevComments, response.data.post.comment]);
       setNewComment("");
     } catch (err) {
@@ -62,20 +62,24 @@ const CommentModal = ({ onClose, id }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg max-w-lg w-[95%] p-4 relative">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-red-500 hover:cursor-pointer"
-          aria-label="Close modal"
-        >
-          <img className="w-8" src={closeIcon} alt="Close" />
-        </button>
+      <span onClick={onClose} className="text-red-500 hover:cursor-pointer">
+            <img className="w-10" src={closeIcon} alt="close comments" />
+        </span>
         <div className="flex flex-col">
           <h2 className="text-2xl font-semibold mb-4">Comments</h2>
-          {error && <p className="text-red-500 mb-2">{error}</p>}
-          {isLoading && <p className="text-gray-600">Loading comments...</p>}
-          <div className="space-y-4">
-            {comments.length === 0 && !isLoading && <p>No comments yet.</p>}
-            {comments.map((comment) => (
+          {
+            error? 
+            <p className="text-red-500 mb-2">{error}</p>
+            :
+            isLoading?
+            <p className="text-gray-600">Loading comments...</p>
+            :
+            <div className="space-y-4">
+            {
+            comments.length === 0 && !isLoading? 
+            <p>No comments yet.</p>
+            :
+            comments.map((comment) => (
               <div
                 key={comment._id}
                 className="flex items-start justify-between p-4 border rounded-lg shadow-sm bg-gray-100"
@@ -96,6 +100,8 @@ const CommentModal = ({ onClose, id }) => {
               </div>
             ))}
           </div>
+          }
+          
           {status.loggedIn ? (
             <div className="mt-6">
               <textarea
