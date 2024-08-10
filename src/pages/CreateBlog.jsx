@@ -84,7 +84,7 @@ const CreateBlog = () => {
         event.preventDefault();
         setPostData(prevData => ({
             ...prevData,
-            content: parse(prevData.content)
+            content: prevData.content
         }))
         try{
             await api.post("/", postData)
@@ -133,7 +133,7 @@ const CreateBlog = () => {
                                     formats={formats}
                                     value={postData.content}
                                     onChange={markDownChange}
-                                    className="bg-white"
+                                    className="bg-white h-64"
                                     required
                                 />
                                 {postData.image && <img src={postData.image} alt="Post Image" className="w-full my-5"/>}

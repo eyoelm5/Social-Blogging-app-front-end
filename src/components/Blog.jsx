@@ -78,10 +78,9 @@ function Blog(props) {
           <div className="title text-xl font-bold pt-4 text-justify">
             {props.title}
           </div>
-          <div className="detail justify-between py-4 text-justify">
-            {props.body}
+          <div className="detail justify-between py-4 text-justify" dangerouslySetInnerHTML={{ __html: props.body }}>
           </div>
-      </div>
+      </div> 
       <div className="mt-auto">
         <hr className=" bg-gray-700 w-full h-1 mb-3" />
         <div className="flex justify-start">

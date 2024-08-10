@@ -110,8 +110,7 @@ const SinglePost = () => {
               <div className="title text-xl font-bold pt-4 text-justify">
                 {post.title}
               </div>
-              <div className="detail justify-between py-4 text-justify">
-                {post.content}
+              <div className="detail justify-between py-4 text-justify" dangerouslySetInnerHTML={{ __html: post.content}}>
               </div>
           </div>
           <div className="mt-auto">

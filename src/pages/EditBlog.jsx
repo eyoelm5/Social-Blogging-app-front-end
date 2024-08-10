@@ -137,7 +137,7 @@ const EditBlog = () => {
                                 formats={formats}
                                 value={postData.content}
                                 onChange={markDownChange}
-                                className="bg-white"
+                                className="bg-white h-64"
                                 required
                             />
                             <img src={postData.image} alt="Post Image" className="w-full my-5"/>
