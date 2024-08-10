@@ -132,7 +132,12 @@ const CreateBlog = () => {
                             className="bg-white h-64"
                             required
                         />
-                        {preview && <img src={preview} alt="Post Image" className="w-full my-5"/>}
+                        {
+                        preview ? 
+                        <img src={preview} alt="Post Image" className="w-full my-5"/>
+                        :
+                        <div></div>
+                        }
                         {!imageUploaded && (
                         <label className="block my-5">
                             <input
