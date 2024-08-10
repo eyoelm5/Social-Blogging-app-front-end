@@ -107,7 +107,7 @@ function Blog(props) {
         </div>
         </div>
         </div>
-        <img src={props.img} alt="Blog Img" className="rounded-3xl w-full lg:min-h-[70%] px-1 lg:px-5" />
+        <img src={props.img} alt="Blog Img" className="rounded-3xl w-full lg:min-h-[70%] max-h-72 px-1 lg:px-5" />
       </div>
 
 
