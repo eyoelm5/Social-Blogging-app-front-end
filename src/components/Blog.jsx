@@ -23,9 +23,10 @@ function Blog(props) {
   const bookImg = book ? bookmarked : bookmarking;
 
   const calculateTimeElapsed = () => {
-    const postDate = props.date;
+    const postDate = new Date(post.createdAt);
+    const milli = postDate.getTime()
     const now = new Date().getTime();
-    const elapsed = now - postDate;
+    const elapsed = now - milli;
 
     const months = Math.floor(elapsed / (1000 * 60 * 60 * 24 * 30));
     const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));

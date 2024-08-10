@@ -5,6 +5,7 @@ import Chatbot from "../components/Chatbot";
 import Footer from "../components/Footer";
 import api from "../../api/posts"
 import LoadingPage from "../components/Loading"
+import post from "../assets/post.png"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -51,7 +52,7 @@ const CreateBlog = () => {
     }
 
     const [image, setImage] = useState(null);
-    const [preview, setPreview] = useState(null);
+    const [preview, setPreview] = useState(post);
   
     const handleImageChange = (e) => {
       const file = e.target.files[0];
@@ -132,12 +133,7 @@ const CreateBlog = () => {
                             className="bg-white h-64"
                             required
                         />
-                        {
-                        preview ? 
-                        <img src={preview} alt="Post Image" className="w-full my-5"/>
-                        :
-                        <div></div>
-                        }
+                        <img src={preview} alt="Post Image" className="w-full max-h-64 my-5"/>
                         {!imageUploaded && (
                         <label className="block my-5">
                             <input
