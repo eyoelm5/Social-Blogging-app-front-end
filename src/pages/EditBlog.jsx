@@ -111,7 +111,7 @@ const EditBlog = () => {
                 <LoadingPage />
                 :
                 <div className="content-center flex-grow">
-                    <div className="max-w-96 m-auto p-2">
+                    <div className="max-w-96 mx-auto my-10 p-2">
                         <h1 className="text-3xl">Edit Post</h1>
                         <form onSubmit={sumbit}>
                             <input 

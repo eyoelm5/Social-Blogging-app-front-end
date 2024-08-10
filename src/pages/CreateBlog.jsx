@@ -131,7 +131,7 @@ const CreateBlog = () => {
                                     className="bg-white h-64"
                                     required
                                 />
-                                {postData.image && <img src={postData.image} alt="Post Image" className="w-full my-5"/>}
+                                {postData.image && <img src={preview} alt="Post Image" className="w-full my-5"/>}
                                 <label className="block my-5">
                                     <input
                                         type="file"
