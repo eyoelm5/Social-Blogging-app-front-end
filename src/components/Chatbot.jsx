@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaRobot, FaTimes } from "react-icons/fa"; 
+import { FaRobot, FaTimes } from "react-icons/fa";
 
 const Chatbot = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -22,7 +22,7 @@ const Chatbot = () => {
           <iframe
             src="https://www.chatbase.co/chatbot-iframe/skvxT41WhTZr3YQMULUdr"
             width="100%"
-            style={{ height: "70%", minHeight: "700px" }}
+            style={{ height: "70%", minHeight: "500px", width: "350px" }}
             frameBorder="0"
             title="Chatbot"
             className="rounded-b-lg"
