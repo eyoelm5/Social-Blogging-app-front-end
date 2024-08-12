@@ -57,7 +57,7 @@ function Blog(props) {
     navigate(`/singlepost/${props.id}`);
   };
 
-  const content = props.body.length > 300 ? props.body.slice(0,600) + " ..." : props.body;
+  const content = props.body.length > 300 ? props.body.slice(0,600) + `<span className="text-sky-600 italic">Read More ...</span>` : props.body;
   return (
     <div
       onClick={handleClick}
