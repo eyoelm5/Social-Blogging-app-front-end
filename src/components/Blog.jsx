@@ -57,7 +57,7 @@ function Blog(props) {
     navigate(`/singlepost/${props.id}`);
   };
 
-  const content = props.body.length > 300 ? props.body.slice(0,600) + ` ...` : props.body;
+  const content = props.body.length > 600 ? props.body.slice(0,600) + " ..." : props.body;
   return (
     <div
       onClick={handleClick}
