@@ -20,7 +20,7 @@ const Chatbot = () => {
       {isExpanded && (
         <div className="mt-2 bg-white rounded-lg shadow-lg">
           <iframe
-            src="https://www.chatbase.co/chatbot-iframe/skvxT41WhTZr3YQMULUdr"
+            src="https://www.chatbase.co/chatbot-iframe/uj6EnuKdPtajuwZQMaJWt"
             width="100%"
             style={{ height: "70%", minHeight: "500px", width: "350px" }}
             frameBorder="0"
