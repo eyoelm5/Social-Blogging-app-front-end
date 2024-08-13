@@ -11,8 +11,9 @@ function UpdateProfile() {
     const [email, setEmail] = useState("");
     const [image, setImage] = useState(null);
     const [profilePicture, setProfilePicture] = useState(null);
-    const { refreshStatus } = useAuth()
+    const { status,  refreshStatus } = useAuth()
 
+    !status.loggedIn && navigat('/')
     const navigate = useNavigate()
     useEffect(() => {
         const getUser = async () => {
