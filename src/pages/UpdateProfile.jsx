@@ -13,8 +13,8 @@ function UpdateProfile() {
     const [profilePicture, setProfilePicture] = useState(null);
     const { status,  refreshStatus } = useAuth()
 
-    !status.loggedIn && navigat('/')
     const navigate = useNavigate()
+    !status.loggedIn && navigate('/')
     useEffect(() => {
         const getUser = async () => {
             try {

@@ -48,7 +48,6 @@ const CreateBlog = () => {
     !status.loggedIn && navigate('/')
 
 
-
     function handleChange(event){
         const {name, value} = event.target
         setPostData(prevData => ({

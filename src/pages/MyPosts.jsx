@@ -3,7 +3,7 @@ import MyPost from "../components/Mypost";
 import Chatbot from "../components/Chatbot";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import postImg from '../assets/post.png'
 import LoadingPage from '../components/Loading';
 import api from '../../api/posts'
@@ -13,8 +13,8 @@ const MyPosts = () => {
   const { status } = useAuth()
   const [isLoading, setIsLoading] = useState(true)
   const [posts, setPosts] = useState([])
-
-  !status.loggedIn && Navigate('/')
+  const navigate = useNavigate()
+  !status.loggedIn && navigate('/')
   useEffect(() => {
     const getPosts = async () => {
       const response = await api.get('/my/my')
