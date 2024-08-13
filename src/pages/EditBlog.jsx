@@ -35,7 +35,8 @@ const EditBlog = () => {
     const [postData, setPostData] = useState({})
     const handlePageRender = useRef(false)
     const { id } = useParams()
-
+    const { status,  refreshStatus } = useAuth()
+    !status.loggedIn && navigate('/')
     useEffect(() => {
         const getPost = async () => {
             const response = await api.get(`/${id}`)
