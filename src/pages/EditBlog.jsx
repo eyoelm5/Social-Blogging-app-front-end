@@ -6,6 +6,7 @@ import api from "../../api/posts";
 import LoadingPage from "../components/Loading";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useAuth } from "../AuthContext";
 
 const modules = {
   toolbar: [
