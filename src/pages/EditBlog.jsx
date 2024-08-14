@@ -153,7 +153,8 @@ const EditBlog = () => {
                                         file:rounded-xl file:border-0
                                         file:text-base file:font-semibold
                                         file:bg-slate-50 file:text-black"
-                                        required
+                                    required
+                                    value = {postData.image}
                                 />
                             </label>
                             <button className="text-white bg-black p-2 rounded-md mt-4" type="submit">Update</button>
